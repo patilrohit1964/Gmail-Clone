@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOpen } from '../redux/appSlice'
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { db } from '../firebase'
 const SendMail = () => {
     const [formData, setFormData] = useState({
         to: "",
@@ -15,10 +17,15 @@ const SendMail = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+        await addDoc(collection(db, "emails"), { ...formData, createdAt: serverTimestamp() })
         dispatch(setOpen(false));
-        console.log(formData)
+        setFormData({
+            to: "",
+            subject: "",
+            message: ""
+        })
     }
 
     return (
