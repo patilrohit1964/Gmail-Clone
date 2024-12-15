@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react'
-import Message from './Message'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
-import { db } from '../firebase'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { db } from '../firebase'
 import { setEmails } from '../redux/appSlice'
+import Message from './Message'
 
 const Messages = () => {
 
-    const { emails } = useSelector((state) => state.appSlice)
+    const { emails, searchText } = useSelector((state) => state.appSlice);
+    const [tempEmail, setTempEmails] = useState(emails)
+    const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
     useEffect(() => {
-
         const q = query(collection(db, "emails"), orderBy("createdAt", "desc"))
-
         const unSubscribe = onSnapshot(q, (snapshot) => {
             const allEmails = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))
             dispatch(setEmails(allEmails))
@@ -22,9 +21,15 @@ const Messages = () => {
         return () => unSubscribe();
     }, [])
 
+    useEffect(() => {
+        const filterdEmails = emails?.filter(email => {
+            return email?.subject?.toLowerCase()?.includes(searchText?.toLowerCase()) || email?.message?.toLowerCase().includes(searchText?.toLowerCase())
+        })
+        setTempEmails(filterdEmails);
+    }, [searchText, emails]);
     return (
         <div>
-            {emails && emails.map((email) => (
+            {tempEmail && tempEmail.map((email) => (
                 <Message key={email.id} email={email} />
             ))}
         </div>

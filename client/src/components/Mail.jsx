@@ -1,13 +1,31 @@
+import { collection, deleteDoc, doc } from 'firebase/firestore';
 import React from 'react';
 import { IoMdArrowBack, IoMdMore } from "react-icons/io";
 import { MdArchive, MdDeleteOutline, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineAddTask, MdOutlineDriveFileMove, MdOutlineMarkEmailUnread, MdOutlineReport, MdOutlineWatchLater } from "react-icons/md";
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { db } from '../firebase';
+import { motion } from "framer-motion"
 const Mail = () => {
     const navigate = useNavigate();
-    const { selectEmail } = useSelector(state => state.appSlice)
+    const { selectEmail } = useSelector(state => state.appSlice);
+    const { id } = useParams()
+
+    const deleteMailById = async (id) => {
+        try {
+            await deleteDoc(doc(db, "emails", id))
+            navigate("/")
+        } catch (error) {
+
+        }
+    }
     return (
-        <div className='flex-1 bg-white rounded-xl mx-5'>
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className='flex-1 bg-white rounded-xl mx-5'
+        >
             <div className='flex items-center justify-between px-4'>
                 <div className='flex items-center gap-2 text-gray-700 py-2'>
                     <div className='p-2 rounded-full hover:bg-gray-100 cursor-pointer' onClick={() => navigate('/')}>
@@ -19,7 +37,7 @@ const Mail = () => {
                     <div className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
                         <MdOutlineReport size={"20px"} />
                     </div>
-                    <div className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
+                    <div onClick={() => deleteMailById(id)} className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
                         <MdDeleteOutline size={"20px"} />
                     </div>
                     <div className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
@@ -61,7 +79,7 @@ const Mail = () => {
                     <p>{selectEmail?.message}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
