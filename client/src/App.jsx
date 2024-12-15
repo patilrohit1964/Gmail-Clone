@@ -6,6 +6,7 @@ import Inbox from './components/Inbox'
 import Mail from './components/Mail'
 import Navbar from './components/shared/Navbar'
 import SendMail from './components/SendMail'
+import Login from './components/Login'
 
 const router = createBrowserRouter([
   {
@@ -25,13 +26,24 @@ const router = createBrowserRouter([
   }
 ])
 const App = () => {
+  const user = true
   return (
     <div className='bg-[#f6f8fc] h-screen w-screen overflow-hidden'>
-      <Navbar />
-      <RouterProvider router={router} />
-      <div className='w-[30%] absolute bottom-0 right-20 z-10'>
-        <SendMail />
-      </div>
+      {user ? (
+        <Login />
+      )
+        :
+        (
+          <>
+            <Navbar />
+            <RouterProvider router={router} />
+            <div className='w-[30%] absolute bottom-0 right-20 z-10'>
+              <SendMail />
+            </div>
+          </>
+        )
+
+      }
       {/* <Sidebar /> */}
     </div>
   )
