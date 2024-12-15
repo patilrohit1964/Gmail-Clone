@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { MdCropSquare, MdInbox } from 'react-icons/md'
+import { MdCropSquare, MdInbox, MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { FaCaretDown, FaUserFriends } from 'react-icons/fa'
 import { IoMdMore, IoMdRefresh } from 'react-icons/io'
 import { GoTag } from 'react-icons/go'
@@ -42,6 +42,11 @@ const Inbox = () => {
                     <div className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
                         <IoMdMore size={"20px"} />
                     </div>
+                </div>
+                <div className='flex items-center gap-2'>
+                    <p className='text-sm text-gray-500'>1-50 of 2000</p>
+                    <button className='hover:rounded-full hover:bg-gray-100'><MdKeyboardArrowLeft size={"24px"} /></button>
+                    <button className='hover:rounded-full hover:bg-gray-100'><MdKeyboardArrowRight size={"24px"} /></button>
                 </div>
             </div>
             <div className='h-[90vh] overflow-y-auto'>
