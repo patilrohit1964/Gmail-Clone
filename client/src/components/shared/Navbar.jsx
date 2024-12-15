@@ -32,7 +32,7 @@ const Navbar = () => {
                         <CiDesktop size={24} />
                     </div>
                     <div className='p-3 rounded-full hover:bg-gray-100 cursor-pointer'>
-                        <Avatar size={24} />
+                        <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0-azLIwrCZPZsjTAX5M-FDcZZ7g3dD1Y2yQ&s' size={40} round={true} />
                     </div>
                 </div>
             </div>
