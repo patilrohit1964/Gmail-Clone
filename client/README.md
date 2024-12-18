@@ -14,7 +14,7 @@
 
 <div style="margin:12px 0px">
     <h2>Overview</h2>
-    <p>TGmail Clone is a web-based email application that mimics the core functionalities of Google's Gmail. This project demonstrates a comprehensive implementation of modern web technologies to create a user-friendly, responsive, and functional email client. It includes features such as sending and receiving emails, organizing messages, and user authentication.</p>
+    <p>TGmail Clone is a web-based email application that mimics the core functionalities of Google's Gmail. This project demonstrates a comphensive implementation of modern web technologies to create a user-friendly, responsive, and functional email client. It includes features such as sending and receiving emails, organizing messages, and user authentication.</p>
 </div>
 <hr/>
 <div>
@@ -73,7 +73,7 @@
 <div>
     <h2>Firebase Configuration</h2>
     <p>Ensure that your firebase file is set up correctly in the src/firebase.js:</p>
-    <pre>
+    <p>
         import { initializeApp } from "firebase/app";
         import { getAuth } from "firebase/auth";
         import { getFirestore } from "firebase/firestore";
@@ -89,7 +89,7 @@
         const app = initializeApp(firebaseConfig);
         export const auth = getAuth(app);
         export const db = getFirestore(app);
-    </pre>
+    </p>
 
 </div>
 
