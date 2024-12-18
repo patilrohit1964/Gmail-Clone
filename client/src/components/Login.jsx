@@ -1,12 +1,20 @@
 import React from 'react'
-import GoogleButton from "google-button"
+import GoogleButton from "react-google-button"
 import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from '../firebase'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../redux/appSlice'
 const Login = () => {
 
+  const dispatch = useDispatch()
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider)
+      const result = await signInWithPopup(auth, provider);
+      dispatch(setUser({
+        displayName: result.user.displayName,
+        email: result.user.email,
+        photoUrl: result.user.photoURL
+      }))
     } catch (error) {
 
     }
