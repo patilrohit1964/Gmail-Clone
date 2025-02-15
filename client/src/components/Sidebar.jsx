@@ -39,7 +39,7 @@ const Sidebar = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className='w-[15%]'>
+        <div className='w-[15%] sm:w-[20%] md:w-[25%] lg:w-[15%] xl:w-[12%]'>
             <div className='p-3'>
                 <button onClick={() => dispatch(setOpen(true))} className='flex items-center gap-2 p-4 rounded-2xl hover:shadow-md bg-[#c2e7ff]'>
                     <LuPencil size={"24px"} />
@@ -54,8 +54,8 @@ const Sidebar = () => {
                     </div>
                 ))}
             </div>
-
         </div>
+
     )
 }
 
